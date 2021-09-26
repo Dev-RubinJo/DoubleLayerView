@@ -1,0 +1,16 @@
+PODS:
+  - DoubleLayerView (0.1.0)
+
+DEPENDENCIES:
+  - DoubleLayerView (from `../`)
+
+EXTERNAL SOURCES:
+  DoubleLayerView:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  DoubleLayerView: 83dca0fa4f0a87e9300b7fee7e37d269a2d71de6
+
+PODFILE CHECKSUM: f0e2f26d9c2f779ee70545023e7d991375399bb3
+
+COCOAPODS: 1.10.1
