@@ -38,9 +38,9 @@ open class DoubleLayerView: UIView {
         set { externalLayer.borderColor = newValue.cgColor }
     }
     
-    @IBInspectable open var interval: CGFloat {
-        get { return self._interval }
-        set { self._interval = newValue }
+    @IBInspectable open var spacing: CGFloat {
+        get { return self._spacing }
+        set { self._spacing = newValue }
     }
     
     // MARK: - UI Property
@@ -49,7 +49,8 @@ open class DoubleLayerView: UIView {
     
     // MARK: - Property
     
-    private var _interval: CGFloat = 0
+    /// Spacing between externalLayerBorder and view
+    private var _spacing: CGFloat = 0
     
     // MARK: - Initializer
     
@@ -74,7 +75,7 @@ open class DoubleLayerView: UIView {
     
     private func configureSecondLayer() {
         clipsToBounds = false
-        externalLayer.frame = CGRect(x: bounds.origin.x - interval, y: bounds.origin.y - interval, width: frame.width + interval * 2, height: frame.height + interval * 2)
+        externalLayer.frame = CGRect(x: bounds.origin.x - spacing, y: bounds.origin.y - spacing, width: frame.width + spacing * 2, height: frame.height + spacing * 2)
         let cornerRadiusPro = layer.cornerRadius / frame.width
         externalLayer.cornerRadius = externalLayer.frame.width * cornerRadiusPro
         self.layer.insertSublayer(externalLayer, above: self.layer)
