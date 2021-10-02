@@ -19,7 +19,7 @@ open class DoubleLayerView: UIView {
     }
     
     @IBInspectable open var borderColor: UIColor {
-        get { return UIColor(cgColor: layer.borderColor ?? UIColor.white.cgColor) }
+        get { return UIColor(cgColor: layer.borderColor ?? UIColor.clear.cgColor) }
         set { layer.borderColor = newValue.cgColor }
     }
     
@@ -28,29 +28,30 @@ open class DoubleLayerView: UIView {
         set { layer.cornerRadius = newValue }
     }
     
-    @IBInspectable open var externalLayerBorderWidth: CGFloat {
-        get { return externalLayer.borderWidth }
-        set { externalLayer.borderWidth = newValue }
+    @IBInspectable open var borderSpacing: CGFloat {
+        get { return _borderSpacing }
+        set { _borderSpacing = newValue }
     }
     
-    @IBInspectable open var externalLayerBorderColor: UIColor {
-        get { return UIColor(cgColor: externalLayer.borderColor ?? UIColor.white.cgColor) }
-        set { externalLayer.borderColor = newValue.cgColor }
+    open override var backgroundColor: UIColor? {
+        willSet {
+            _backgroundColor = backgroundColor
+        }
     }
     
-    @IBInspectable open var spacing: CGFloat {
-        get { return self._spacing }
-        set { self._spacing = newValue }
+    private var cornerRadiusProportion: CGFloat {
+        get { return self.layer.cornerRadius / self.frame.width }
     }
     
     // MARK: - UI Property
     
-    private let externalLayer: CALayer = CALayer()
+    private let innerLayer:CALayer = CALayer()
     
     // MARK: - Property
     
-    /// Spacing between externalLayerBorder and view
-    private var _spacing: CGFloat = 0
+    private var _borderSpacing: CGFloat = 0
+    private var _buttonColor: UIColor?
+    private var _backgroundColor: UIColor?
     
     // MARK: - Initializer
     
@@ -68,16 +69,36 @@ open class DoubleLayerView: UIView {
     
     override open func layoutSubviews() {
         super.layoutSubviews()
-        configureSecondLayer()
+        configureInnerLayer()
     }
     
-    // MARK: - Hepler
+    // MARK: - Method
     
-    private func configureSecondLayer() {
+    private func configureInnerLayer() {
         clipsToBounds = false
-        externalLayer.frame = CGRect(x: bounds.origin.x - spacing, y: bounds.origin.y - spacing, width: frame.width + spacing * 2, height: frame.height + spacing * 2)
-        let cornerRadiusPro = layer.cornerRadius / frame.width
-        externalLayer.cornerRadius = externalLayer.frame.width * cornerRadiusPro
-        self.layer.insertSublayer(externalLayer, above: self.layer)
+        _backgroundColor = backgroundColor
+        backgroundColor = .clear
+        
+        innerLayer.removeFromSuperlayer()
+        innerLayer.frame = CGRect(x: 0, y: 0,
+                                  width: frame.width - _borderSpacing - borderWidth,
+                                  height: frame.height - _borderSpacing - borderWidth)
+        innerLayer.position = CGPoint(x: centerX, y: centerY)
+        innerLayer.backgroundColor = _backgroundColor?.cgColor
+        innerLayer.cornerRadius = innerLayer.frame.width * cornerRadiusProportion
+        
+        layer.addSublayer(innerLayer)
+    }
+}
+
+// MARK: - Extension
+
+extension UIView {
+    var centerX: CGFloat {
+        return frame.width / 2
+    }
+    
+    var centerY: CGFloat {
+        return frame.height / 2
     }
 }
