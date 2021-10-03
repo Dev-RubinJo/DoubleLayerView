@@ -50,7 +50,6 @@ open class DoubleLayerView: UIView {
     // MARK: - Property
     
     private var _borderSpacing: CGFloat = 0
-    private var _buttonColor: UIColor?
     private var _backgroundColor: UIColor?
     
     // MARK: - Initializer
