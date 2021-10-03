@@ -24,12 +24,7 @@ class ViewController: UIViewController {
     }
 
     @IBAction func didTapAnimateButton(_ sender: Any) {
-        UIView.animate(withDuration: 1) {
-            self.doubleLayerView.cornerRadius = 20
-            self.doubleLayerView.borderSpacing = 20
-            self.doubleLayerView.borderWidth = 12
-            self.doubleLayerView.borderColor = .blue
-        }
+        doubleLayerView.changeProperty()
     }
 }
 

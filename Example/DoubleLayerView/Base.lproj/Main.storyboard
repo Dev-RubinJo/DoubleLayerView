@@ -21,10 +21,10 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oWZ-8q-jjI" customClass="DoubleLayerView" customModule="DoubleLayerView">
-                                <rect key="frame" x="165" y="392" width="60" height="60"/>
+                                <rect key="frame" x="135" y="392" width="120" height="60"/>
                                 <color key="backgroundColor" systemColor="systemGray5Color"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="60" id="ZCY-CR-4Co"/>
+                                    <constraint firstAttribute="width" constant="120" id="ZCY-CR-4Co"/>
                                     <constraint firstAttribute="height" constant="60" id="cfq-sB-XTn"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>

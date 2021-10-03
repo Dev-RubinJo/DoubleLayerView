@@ -71,6 +71,7 @@ open class DoubleLayerView: UIView {
     
     convenience init() {
         self.init(frame: CGRect.zero)
+//        innerLayer.drawsAsynchronously = true
     }
     
     override open func layoutSubviews() {
@@ -105,16 +106,55 @@ open class DoubleLayerView: UIView {
     private func updateInnerBackgroundColor() {
         innerLayer.backgroundColor = innerBackgroundColor.cgColor
     }
-}
-
-// MARK: - Extension
-
-extension UIView {
-    var centerX: CGFloat {
-        return frame.width / 2
-    }
     
-    var centerY: CGFloat {
-        return frame.height / 2
+    /// Just test. We have to refactor this method
+    open func changeProperty() {
+        CATransaction.begin()
+        CATransaction.setCompletionBlock {
+            print("Something")
+        }
+        CATransaction.setAnimationDuration(5)
+        
+        cornerRadius = 20
+        borderSpacing = 20
+        borderWidth = 10
+        borderColor = .blue
+
+        UIView.animate(withDuration: 1) {
+            self.layoutIfNeeded()
+        }
+        
+        let backgroundAnimation = CABasicAnimation(keyPath: #keyPath(CALayer.borderColor))
+        backgroundAnimation.fromValue = UIColor.systemGreen.cgColor
+        backgroundAnimation.toValue = UIColor.blue.cgColor
+        
+        let cornerAnimation = CABasicAnimation(keyPath: #keyPath(CALayer.cornerRadius))
+        cornerAnimation.fromValue = 8
+        cornerAnimation.toValue = 20
+        
+        let borderWidthAnimation = CABasicAnimation(keyPath: #keyPath(CALayer.borderWidth))
+        borderWidthAnimation.fromValue = 4
+        borderWidthAnimation.toValue = 10
+        
+        let innerCornerAnimation = CABasicAnimation(keyPath: #keyPath(CALayer.cornerRadius))
+        cornerAnimation.fromValue = 8
+        cornerAnimation.toValue = innerLayer.frame.width * cornerRadiusProportion
+        
+        let boundsAnimation = CABasicAnimation(keyPath: #keyPath(CALayer.frame))
+        boundsAnimation.fromValue = innerLayer.frame
+        boundsAnimation.toValue = CGRect(x: 0, y: 0,
+                                         width: frame.width - _borderSpacing - borderWidth,
+                                         height: frame.height - _borderSpacing - borderWidth)
+
+        
+        self.layer.add(cornerAnimation, forKey: #keyPath(CALayer.cornerRadius))
+        self.layer.add(backgroundAnimation, forKey: #keyPath(CALayer.borderColor))
+        self.layer.add(borderWidthAnimation, forKey: #keyPath(CALayer.borderWidth))
+        
+        innerLayer.add(innerCornerAnimation, forKey: #keyPath(CALayer.cornerRadius))
+        innerLayer.add(boundsAnimation, forKey: #keyPath(CALayer.frame))
+
+        CATransaction.commit()
     }
 }
+

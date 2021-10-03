@@ -11,6 +11,9 @@
 		2EF734647B09A877868C4F3DAD0A4501 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
 		39DD342142F748BC38ABE976E087D55D /* Pods-DoubleLayerView_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 2FEB2E46A613A6DBCB550D9E31BC61D0 /* Pods-DoubleLayerView_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3FEE821308F46D80AAADCA7A089B8317 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
+		43848A682709D0C400D34E62 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43848A672709D0C400D34E62 /* UIView.swift */; };
+		43848A692709D0CF00D34E62 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43848A672709D0C400D34E62 /* UIView.swift */; };
+		43848A6A2709D0D000D34E62 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43848A672709D0C400D34E62 /* UIView.swift */; };
 		43BA3FEE27003E79007147A5 /* DoubleLayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43BA3FED27003E79007147A5 /* DoubleLayerView.swift */; };
 		43BA3FEF27003E79007147A5 /* DoubleLayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43BA3FED27003E79007147A5 /* DoubleLayerView.swift */; };
 		43BA3FF027003E79007147A5 /* DoubleLayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43BA3FED27003E79007147A5 /* DoubleLayerView.swift */; };
@@ -47,6 +50,7 @@
 		300785E8C6618251E375FCF836DDC931 /* Pods-DoubleLayerView_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-DoubleLayerView_Example-acknowledgements.plist"; sourceTree = "<group>"; };
 		4036D01AE9DA957849F3C3F004DBDFA9 /* Pods-DoubleLayerView_Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-DoubleLayerView_Tests-dummy.m"; sourceTree = "<group>"; };
 		40C8DA4B4AFCA37C6DE561C0581CEEA3 /* Pods-DoubleLayerView_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-DoubleLayerView_Example.debug.xcconfig"; sourceTree = "<group>"; };
+		43848A672709D0C400D34E62 /* UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		43BA3FED27003E79007147A5 /* DoubleLayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DoubleLayerView.swift; path = DoubleLayerView/Classes/DoubleLayerView.swift; sourceTree = "<group>"; };
 		5E9D318A4DD8D02A6CFEC4F170A14A21 /* Pods-DoubleLayerView_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-DoubleLayerView_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
 		6361290201903160E178E9ED3BD26638 /* DoubleLayerView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DoubleLayerView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -126,6 +130,15 @@
 				E8571A2F9E65D19E982AB4F96FFA16B5 /* Pods_DoubleLayerView_Tests.framework */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		43848A662709D0C400D34E62 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				43848A672709D0C400D34E62 /* UIView.swift */,
+			);
+			name = Extension;
+			path = DoubleLayerView/Classes/Extension;
 			sourceTree = "<group>";
 		};
 		5127616ED0D6434567F48C3A67BE026E /* Pod */ = {
@@ -217,6 +230,7 @@
 		E137E9568A4FBCE9752C48987E4FE9B5 /* DoubleLayerView */ = {
 			isa = PBXGroup;
 			children = (
+				43848A662709D0C400D34E62 /* Extension */,
 				43BA3FED27003E79007147A5 /* DoubleLayerView.swift */,
 				5127616ED0D6434567F48C3A67BE026E /* Pod */,
 				CF9A70F526C4719C12E0B6265A52FBB0 /* Support Files */,
@@ -378,6 +392,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4B2339CC82D4B27203E4BE5CB3A93011 /* Pods-DoubleLayerView_Example-dummy.m in Sources */,
+				43848A692709D0CF00D34E62 /* UIView.swift in Sources */,
 				43BA3FEF27003E79007147A5 /* DoubleLayerView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -387,6 +402,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				43BA3FEE27003E79007147A5 /* DoubleLayerView.swift in Sources */,
+				43848A682709D0C400D34E62 /* UIView.swift in Sources */,
 				0E1A58B477FDF5C3DFF48D5FE471B5C5 /* DoubleLayerView-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -396,6 +412,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F5B2E013E15A21CC1928504D6B7FA919 /* Pods-DoubleLayerView_Tests-dummy.m in Sources */,
+				43848A6A2709D0D000D34E62 /* UIView.swift in Sources */,
 				43BA3FF027003E79007147A5 /* DoubleLayerView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
