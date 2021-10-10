@@ -25,32 +25,39 @@ open class DoubleLayerView: UIView {
     
     @IBInspectable open var cornerRadius: CGFloat {
         get { return layer.cornerRadius }
-        set { layer.cornerRadius = newValue }
+        set {
+            layer.cornerRadius = newValue
+            updateCornerRadius()
+        }
     }
     
     @IBInspectable open var borderSpacing: CGFloat {
         get { return _borderSpacing }
-        set { _borderSpacing = newValue }
-    }
-    
-    open override var backgroundColor: UIColor? {
-        willSet {
-            _backgroundColor = backgroundColor
+        set {
+            _borderSpacing = newValue
+            updateBorderSpacing()
         }
     }
     
-    private var cornerRadiusProportion: CGFloat {
-        get { return self.layer.cornerRadius / self.frame.width }
+    @IBInspectable open var innerBackgroundColor: UIColor {
+        get { return _innerBackgroundColor ?? .clear }
+        set {
+            _innerBackgroundColor = newValue
+            updateInnerBackgroundColor()
+        }
     }
     
     // MARK: - UI Property
     
-    private let innerLayer:CALayer = CALayer()
+    private let innerLayer = CALayer()
     
     // MARK: - Property
     
     private var _borderSpacing: CGFloat = 0
-    private var _backgroundColor: UIColor?
+    private var _innerBackgroundColor: UIColor?
+    private var cornerRadiusProportion: CGFloat {
+        get { return self.layer.cornerRadius / self.frame.width }
+    }
     
     // MARK: - Initializer
     
@@ -63,7 +70,7 @@ open class DoubleLayerView: UIView {
     }
     
     convenience init() {
-        self.init(frame: .zero)
+        self.init(frame: CGRect.zero)
     }
     
     override open func layoutSubviews() {
@@ -71,22 +78,32 @@ open class DoubleLayerView: UIView {
         configureInnerLayer()
     }
     
-    // MARK: - Method
+    // MARK: - Mehotd
     
     private func configureInnerLayer() {
-        clipsToBounds = false
-        _backgroundColor = backgroundColor
         backgroundColor = .clear
         
         innerLayer.removeFromSuperlayer()
+        updateInnerBackgroundColor()
+        updateBorderSpacing()
+        updateCornerRadius()
+        
+        layer.addSublayer(innerLayer)
+    }
+    
+    private func updateBorderSpacing() {
         innerLayer.frame = CGRect(x: 0, y: 0,
                                   width: frame.width - _borderSpacing - borderWidth,
                                   height: frame.height - _borderSpacing - borderWidth)
         innerLayer.position = CGPoint(x: centerX, y: centerY)
-        innerLayer.backgroundColor = _backgroundColor?.cgColor
+    }
+    
+    private func updateCornerRadius() {
         innerLayer.cornerRadius = innerLayer.frame.width * cornerRadiusProportion
-        
-        layer.addSublayer(innerLayer)
+    }
+    
+    private func updateInnerBackgroundColor() {
+        innerLayer.backgroundColor = innerBackgroundColor.cgColor
     }
 }
 
