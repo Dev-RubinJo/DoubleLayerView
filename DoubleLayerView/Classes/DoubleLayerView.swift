@@ -58,6 +58,9 @@ open class DoubleLayerView: UIView {
     private var cornerRadiusProportion: CGFloat {
         get { return self.layer.cornerRadius / self.frame.width }
     }
+    private var innerLayerCornerRadius: CGFloat {
+        get { return cornerRadius - (borderWidth * 2) }
+    }
     
     // MARK: - Initializer
     
@@ -93,13 +96,13 @@ open class DoubleLayerView: UIView {
     
     private func updateBorderSpacing() {
         innerLayer.frame = CGRect(x: 0, y: 0,
-                                  width: frame.width - _borderSpacing - borderWidth,
-                                  height: frame.height - _borderSpacing - borderWidth)
+                                  width: frame.width - _borderSpacing - (borderWidth * 2),
+                                  height: frame.height - _borderSpacing - (borderWidth * 2))
         innerLayer.position = CGPoint(x: centerX, y: centerY)
     }
     
     private func updateCornerRadius() {
-        innerLayer.cornerRadius = innerLayer.frame.width * cornerRadiusProportion
+        innerLayer.cornerRadius = innerLayerCornerRadius
     }
     
     private func updateInnerBackgroundColor() {
