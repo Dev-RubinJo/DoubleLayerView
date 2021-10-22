@@ -66,6 +66,9 @@
                             <constraint firstItem="oWZ-8q-jjI" firstAttribute="centerY" secondItem="kh9-bI-dsS" secondAttribute="centerY" id="Odx-ja-q6S"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="doubleLayerView" destination="oWZ-8q-jjI" id="cAJ-9e-zVO"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>

@@ -25,7 +25,10 @@ open class DoubleLayerView: UIView {
     
     @IBInspectable open var cornerRadius: CGFloat {
         get { return layer.cornerRadius }
-        set { layer.cornerRadius = newValue }
+        set {
+            layer.cornerRadius = newValue
+            updateCornerRadius()
+        }
     }
     
     @IBInspectable open var borderSpacing: CGFloat {
@@ -115,7 +118,7 @@ open class DoubleLayerView: UIView {
     
     private func updateCornerRadius() {
         if isCircular && isSquare {
-            cornerRadius = frame.width / 2
+            layer.cornerRadius = frame.width / 2
             innerLayer.cornerRadius = innerLayer.frame.width / 2
         } else {
             innerLayer.cornerRadius = innerLayerCornerRadius
