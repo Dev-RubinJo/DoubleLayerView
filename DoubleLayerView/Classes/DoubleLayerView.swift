@@ -25,10 +25,7 @@ open class DoubleLayerView: UIView {
     
     @IBInspectable open var cornerRadius: CGFloat {
         get { return layer.cornerRadius }
-        set {
-            layer.cornerRadius = newValue
-            updateCornerRadius()
-        }
+        set { layer.cornerRadius = newValue }
     }
     
     @IBInspectable open var borderSpacing: CGFloat {
@@ -47,6 +44,14 @@ open class DoubleLayerView: UIView {
         }
     }
     
+    @IBInspectable open var isCircular: Bool {
+        get { return _isCircular }
+        set {
+            _isCircular = newValue
+            updateCornerRadius()
+        }
+    }
+    
     // MARK: - UI Property
     
     private let innerLayer = CALayer()
@@ -55,11 +60,18 @@ open class DoubleLayerView: UIView {
     
     private var _borderSpacing: CGFloat = 0
     private var _innerBackgroundColor: UIColor?
-    private var cornerRadiusProportion: CGFloat {
-        get { return self.layer.cornerRadius / self.frame.width }
-    }
+    private var _isCircular: Bool = false
     private var innerLayerCornerRadius: CGFloat {
         get { return cornerRadius - (borderWidth * 2) }
+    }
+    private var isSquare: Bool {
+        get {
+            if frame.width == frame.height {
+                return true
+            } else {
+                return false
+            }
+        }
     }
     
     // MARK: - Initializer
@@ -102,7 +114,12 @@ open class DoubleLayerView: UIView {
     }
     
     private func updateCornerRadius() {
-        innerLayer.cornerRadius = innerLayerCornerRadius
+        if isCircular && isSquare {
+            cornerRadius = frame.width / 2
+            innerLayer.cornerRadius = innerLayer.frame.width / 2
+        } else {
+            innerLayer.cornerRadius = innerLayerCornerRadius
+        }
     }
     
     private func updateInnerBackgroundColor() {
